@@ -17,10 +17,11 @@ public class PhoneBookTests extends BaseTest {
     @Test
     public void loginWithoutPasswordTestPositive() throws InterruptedException {
         Allure.description("Login without password. Positive test.");
+
         Allure.step("Main page creation ... ");
         MainPage mainPage = new MainPage(getDriver());
-        Allure.step("Open Login page ");
 
+        Allure.step("Open Login page ");
         LoginPage loginPage = BasePage.openTopMenuItem(TopMenuItem.LOGIN);
 
         Alert alert = loginPage.fillEmailField("kjdgljf@mail.com").clickByRegistrationButton();
@@ -42,7 +43,6 @@ public class PhoneBookTests extends BaseTest {
                 .clickByRegistrationButton();
         boolean result = AlertHandler.handleAlert(alert, expectedAlertText);
         Assert.assertTrue(result);
-
     }
 
     @Test
@@ -75,7 +75,6 @@ public class PhoneBookTests extends BaseTest {
         addPage.fillContactFormAndSave(contact);
         ContactsPage contactsPage = new ContactsPage(getDriver());
         Assert.assertTrue(contactsPage.getDataFromContactList(contact));
-
     }
 
     @Test
@@ -117,6 +116,5 @@ public class PhoneBookTests extends BaseTest {
         } else {
             TakeScreen.takeScreenShot(getDriver(), "Successful Registration");
         }
-
     }
 }
