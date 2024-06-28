@@ -8,12 +8,18 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
 public class BaseTest {
     private WebDriver driver;
@@ -72,6 +78,23 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy_HHmmss");
+        String currentDate = dateFormat.format(new Date());
+        String fileName = "PhoneBook_" + currentDate + ".log";
+
+        try {
+            FileWriter writer = new FileWriter(fileName);
+            LogEntries logEntries = driver.manage().logs().get("server");
+            for (LogEntry entry : logEntries) {
+                writer.write(entry.getMessage() + "\n");
+            }
+            writer.close();
+            System.out.println("File log has been created...");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         WebDriver driver1 = getDriver();
         if (driver1 != null) {
             driver1.quit();

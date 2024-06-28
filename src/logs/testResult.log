@@ -1,0 +1,73 @@
+HTTP/1.1 200 
+Server: Cowboy
+Report-To: {"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1716323408&sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6&s=XVQ3603sIth7cKEhCwVURQXhn1D6pSOO4ftPSaFgawk%3D"}]}
+Reporting-Endpoints: heroku-nel=https://nel.heroku.com/reports?ts=1716323408&sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6&s=XVQ3603sIth7cKEhCwVURQXhn1D6pSOO4ftPSaFgawk%3D
+Nel: {"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}
+Connection: keep-alive
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Xss-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Tue, 21 May 2024 20:30:08 GMT
+Via: 1.1 vegur
+
+{
+    "contacts": [
+        {
+            "id": "123150c6-d70a-47c9-92fb-9c241bb3f0f0",
+            "name": "Gordon",
+            "lastName": "Moore",
+            "email": "ohnvt@iszfm.nvo",
+            "phone": "1964088341921",
+            "address": "2 Broadway Street, Houston MN 87744",
+            "description": "desc"
+        },
+        {
+            "id": "dc1acdb9-dbf4-4dd2-b34d-f6d3a61e0c81",
+            "name": "Isaac",
+            "lastName": "King",
+            "email": "ffsev@ypgzr.wlh",
+            "phone": "5713733891401",
+            "address": "150 Pine Street, New York DE 11018",
+            "description": "desc"
+        },
+        {
+            "id": "d96e708b-6a3b-4c24-9696-002c5b663f15",
+            "name": "Greg",
+            "lastName": "King",
+            "email": "epnoe@pchqg.jzp",
+            "phone": "346897784531",
+            "address": "12 Second Street, San Diego KS 58850",
+            "description": "08052024"
+        },
+        {
+            "id": "1eac6f69-7143-481b-a92f-3601aee998f0",
+            "name": "Gavin",
+            "lastName": "Rice",
+            "email": "ngtpk@zkjmb.pjj",
+            "phone": "9806001735506",
+            "address": "179 Third Street, Dallas FL 02914",
+            "description": "08052024"
+        }
+    ]
+}
+Gordon
+ohnvt@iszfm.nvo
+***
+Isaac
+ffsev@ypgzr.wlh
+***
+Greg
+epnoe@pchqg.jzp
+***
+Gavin
+ngtpk@zkjmb.pjj
+***

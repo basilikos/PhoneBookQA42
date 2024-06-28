@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Objects;
 
 public class Contact implements Serializable {
+    private String id;
     private String name;
     private String lastName;
     private String phone;
@@ -23,20 +24,36 @@ public class Contact implements Serializable {
         this.description = description;
     }
 
+    public Contact(String id, String name, String lastName, String phone, String email, String address, String description) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.description = description;
+    }
+
     public static void serializationContact(Contact contact, String fileName) throws IOException {
         ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName));
         outputStream.writeObject(contact);
     }
 
     public static Contact deSerializationContact(String fileName) {
-        try (
-                ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName));
-        ) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
             return (Contact) inputStream.readObject();
         } catch (IOException | ClassNotFoundException exception) {
             System.out.println("Error during contact deSerialization...");
             return null;
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -91,10 +108,7 @@ public class Contact implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Contact contact)) return false;
-        return Objects.equals(getName(), contact.getName()) && Objects.equals(getLastName(),
-                contact.getLastName()) && Objects.equals(getPhone(), contact.getPhone()) && Objects.equals(getEmail(),
-                contact.getEmail()) && Objects.equals(getAddress(), contact.getAddress()) && Objects.equals(getDescription(),
-                contact.getDescription());
+        return Objects.equals(getName(), contact.getName()) && Objects.equals(getLastName(), contact.getLastName()) && Objects.equals(getPhone(), contact.getPhone()) && Objects.equals(getEmail(), contact.getEmail()) && Objects.equals(getAddress(), contact.getAddress()) && Objects.equals(getDescription(), contact.getDescription());
     }
 
     @Override
@@ -102,4 +116,16 @@ public class Contact implements Serializable {
         return Objects.hash(getName(), getLastName(), getPhone(), getEmail(), getAddress(), getDescription());
     }
 
+    @Override
+    public String toString() {
+        return "Contact {" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

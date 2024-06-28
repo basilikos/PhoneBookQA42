@@ -22,14 +22,20 @@ public class ContactsPage extends BasePage {
 
     public boolean getDataFromContactList(Contact contact) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement nameInContact = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(By.xpath("//h2[contains(text(),'" + contact.getName().toString() + "')]")));
+
+        WebElement nameInContact = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//h2[contains(text(),'" + contact.getName().toString() + "')]"
+                        ))
+        );
         nameInContact.click();
+
         WebElement editButton = driver.findElement(By.xpath("//button[contains(text(),'Edit')]"));
         editButton.click();
 
         WebElement elementName = driver.findElement(By.xpath("//input[@placeholder='Name']"));
         String elementNameValue = elementName.getAttribute("value");
+
         WebElement elementLastName = driver.findElement(By.xpath("//input[@placeholder='Last Name']"));
         String elementLastNameValue = elementLastName.getAttribute("value");
 
@@ -46,45 +52,57 @@ public class ContactsPage extends BasePage {
         String elementDescriptionValue = elementDescription.getAttribute("value");
 
         Contact listContact = new Contact();
+
         listContact.setName(elementNameValue);
         listContact.setLastName(elementLastNameValue);
         listContact.setPhone(elementPhoneValue);
         listContact.setEmail(elementEmailValue);
         listContact.setAddress(elementAddressValue);
         listContact.setDescription(elementDescriptionValue);
-        boolean result = listContact.equals(contact);
-        return result;
 
+        boolean result = listContact.equals(contact);
+
+        return result;
     }
-    public int getContactListSize(){
+
+    public int getContactListSize() {
         return getContactsList().size();
     }
-    protected List<WebElement> getContactsList(){
+
+    protected List<WebElement> getContactsList() {
         return driver.findElements(By.xpath("//div[@class='contact-item_card__2SOIM']"));
     }
-    public void clickRemoveButton(){
+
+    public void clickRemoveButton() {
         WebElement removeButton = driver.findElement(By.xpath("//button[text()='Remove']"));
         removeButton.click();
     }
-    public int deleteContactByPhoneNumber(String phoneNumberOrName){
+
+    public int deleteContactByPhoneNumber(String phoneNumberOrName) {
         List<WebElement> contactList = getContactsList();
         int initSize = contactList.size();
         try {
-            for (WebElement contact : contactList){
-                WebElement phoneNumberData = contact
-                        .findElement(By.xpath("//h2[text()='"+phoneNumberOrName+"'] | //h3[text()='"+phoneNumberOrName+"']"));
-                if(phoneNumberData.isDisplayed()){
+            for (WebElement contact : contactList) {
+                WebElement phoneNumberData = contact.findElement(
+                        By.xpath("//h2[text()='" + phoneNumberOrName + "'] | //h3[text()='" + phoneNumberOrName + "']")
+                );
+                if (phoneNumberData.isDisplayed()) {
                     phoneNumberData.click();
                     clickRemoveButton();
                     break;
                 }
             }
-        }catch (NoSuchElementException exception){exception.fillInStackTrace();
-            System.out.println("The item "+ phoneNumberOrName+" was not found...");}
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-            wait.until(ExpectedConditions
-                    .numberOfElementsToBe(By.xpath("//div[@class='contact-item_card__2SOIM']"), initSize-1));
-            return contactList.size();
+        } catch (NoSuchElementException exception) {
+            exception.fillInStackTrace();
+            System.out.println("The item " + phoneNumberOrName + " was not found...");
+        }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(
+                ExpectedConditions.numberOfElementsToBe(
+                        By.xpath("//div[@class='contact-item_card__2SOIM']"), initSize - 1
+                )
+        );
+        return contactList.size();
     }
 
 }

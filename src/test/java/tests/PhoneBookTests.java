@@ -66,12 +66,18 @@ public class PhoneBookTests extends BaseTest {
                 .fillEmailField(PropertiesReader.getProperty("myuser"))
                 .fillPasswordField(PropertiesReader.getProperty("mypassword"))
                 .clickByLoginButton();
+
         AddPage addPage = BasePage.openTopMenuItem(TopMenuItem.ADD);
-        Contact contact = new Contact(NameAndLastNameGenerator.generateName(),
+
+        Contact contact = new Contact(
+                NameAndLastNameGenerator.generateName(),
                 NameAndLastNameGenerator.generateLastName(),
                 PhoneNumberGenerator.generatePhoneNumber(),
                 EmailGenerator.generateEmail(5, 5, 3),
-                AddressGenerator.generateAddress(), "desc");
+                AddressGenerator.generateAddress(),
+                "desc"
+        );
+
         addPage.fillContactFormAndSave(contact);
         ContactsPage contactsPage = new ContactsPage(getDriver());
         Assert.assertTrue(contactsPage.getDataFromContactList(contact));
@@ -87,18 +93,26 @@ public class PhoneBookTests extends BaseTest {
                 .fillPasswordField(PropertiesReader.getProperty("mypassword"))
                 .clickByLoginButton();
         AddPage addPage = BasePage.openTopMenuItem(TopMenuItem.ADD);
-        Contact contact = new Contact(NameAndLastNameGenerator.generateName(),
+
+        Contact contact = new Contact(
+                NameAndLastNameGenerator.generateName(),
                 NameAndLastNameGenerator.generateLastName(),
                 PhoneNumberGenerator.generatePhoneNumber(),
                 EmailGenerator.generateEmail(5, 5, 3),
-                AddressGenerator.generateAddress(), "desc");
+                AddressGenerator.generateAddress(),
+                "desc"
+        );
+
         addPage.fillContactFormAndSave(contact);
         Contact.serializationContact(contact, fileName);
         ContactsPage contactsPage = new ContactsPage(getDriver());
+
         Contact deserializedContact = Contact.deSerializationContact(fileName);
 
-        Assert.assertNotEquals(contactsPage.deleteContactByPhoneNumber(deserializedContact.getPhone()),
-                contactsPage.getContactListSize());
+        Assert.assertNotEquals(
+                contactsPage.deleteContactByPhoneNumber(deserializedContact.getPhone()),
+                contactsPage.getContactListSize()
+        );
     }
 
     @Test
